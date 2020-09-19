@@ -3,34 +3,69 @@
     <div class="card col-6 p-0">
       <h5 class="card-header">REGISTER</h5>
       <div class="card-body">
-        <form class="col-12">
+        <form [formGroup]="register" class="col-12">
           <div class="col">
             <label for="Email address">Email address</label>
-            <input type="email" class="form-control" name="email" />
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              formControlName="email"
+            />
           </div>
           <div class="col">
             <label for="Password">Password</label>
-            <input type="password" class="form-control" name="pass" />
+            <input
+              type="password"
+              class="form-control"
+              name="pass"
+              formControlName="pass"
+            />
           </div>
           <div class="col">
             <label for="re-password">Re-Password</label>
-            <input type="password" class="form-control" name="rePass" />
+            <input
+              type="password"
+              class="form-control"
+              name="rePass"
+              formControlName="rePass"
+            />
           </div>
           <div class="col">
             <label for="name">Name : </label>
-            <input type="text" class="form-control" name="name" />
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              formControlName="name"
+            />
           </div>
           <div class="col">
             <label for="surname">Surname : </label>
-            <input type="text" class="form-control" name="surname" />
+            <input
+              type="text"
+              class="form-control"
+              name="surname"
+              formControlName="surname"
+            />
           </div>
           <div class="col">
             <label for="age">Age : </label>
-            <input type="text" class="form-control" name="age" />
+            <input
+              type="text"
+              class="form-control"
+              name="age"
+              formControlName="age"
+            />
           </div>
           <div class="col">
             <label for="age">Department : </label>
-            <input type="text" class="form-control" name="dept" />
+            <input
+              type="text"
+              class="form-control"
+              name="dept"
+              formControlName="dept"
+            />
           </div>
           <div class="col mt-3">
             <button type="submit" class="btn btn-primary">Submit</button>
