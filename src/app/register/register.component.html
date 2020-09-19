@@ -3,7 +3,7 @@
     <div class="card col-6 p-0">
       <h5 class="card-header">REGISTER</h5>
       <div class="card-body">
-        <form [formGroup]="register" class="col-12">
+        <form [formGroup]="register" (ngSubmit)="onsave()">
           <div class="col">
             <label for="Email address">Email address</label>
             <input
@@ -13,6 +13,7 @@
               formControlName="email"
             />
           </div>
+          <!-- <span *ngIf="!email" style="color: red;"> กรุณากรอก email ให้ครบถ้วน</span> -->
           <div class="col">
             <label for="Password">Password</label>
             <input
@@ -20,6 +21,7 @@
               class="form-control"
               name="pass"
               formControlName="pass"
+              (change)="passwordtest()"
             />
           </div>
           <div class="col">
@@ -29,8 +31,10 @@
               class="form-control"
               name="rePass"
               formControlName="rePass"
+              (change)="passwordtest()"
             />
           </div>
+          <span *ngIf="!password" style="color: red;"> กรุณากรอก password ให้ถูกต้อง</span>
           <div class="col">
             <label for="name">Name : </label>
             <input
