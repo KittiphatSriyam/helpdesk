@@ -6,11 +6,11 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+// import { MatFormFieldModule } from '@angular/material/form-field';
 @NgModule({
   declarations: [AppComponent, RegisterComponent, LoginComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
