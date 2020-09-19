@@ -8,7 +8,7 @@ app.use(cors({
 }));
 
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json({ type: 'application/*+json' }))
+app.use(bodyParser.json())
 app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
 app.use(bodyParser.text({ type: 'text/html' }))
 
@@ -20,6 +20,13 @@ app.post('/', (req, res) => {
 app.post('/getDepartment', async (req, res) => {
   const department = await Controller.getDepartment()
   res.status(200).json(department)
+})
+
+app.post('/register', async (req, res) => {
+  console.log('req->>', req.body);
+  const member = await Controller.member(req.body)
+  console.log('member->>', member);
+  res.status(200).json(member)
 })
 
 app.listen(3000, () => {

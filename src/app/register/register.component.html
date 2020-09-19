@@ -13,7 +13,7 @@
               formControlName="email"
             />
           </div>
-          <!-- <span *ngIf="!email" style="color: red;"> กรุณากรอก email ให้ครบถ้วน</span> -->
+
           <div class="col">
             <label for="Password">Password</label>
             <input
@@ -21,7 +21,7 @@
               class="form-control"
               name="pass"
               formControlName="pass"
-              (change)="passwordtest()"
+              (change)="isMatchedPassWord()"
             />
           </div>
           <div class="col">
@@ -31,10 +31,13 @@
               class="form-control"
               name="rePass"
               formControlName="rePass"
-              (change)="passwordtest()"
+              (change)="isMatchedPassWord()"
             />
+            <span *ngIf="!passwordMatched" class="text-danger">
+              กรุณากรอก password ให้ถูกต้อง</span
+            >
           </div>
-          <span *ngIf="!password" style="color: red;"> กรุณากรอก password ให้ถูกต้อง</span>
+
           <div class="col">
             <label for="name">Name : </label>
             <input
@@ -64,12 +67,14 @@
           </div>
           <div class="col">
             <label for="age">Department : </label>
-            <input
-              type="text"
-              class="form-control"
-              name="dept"
-              formControlName="dept"
-            />
+            <select class="form-control" name="dept" formControlName="dept">
+              <option
+                *ngFor="let dept of department"
+                [value]="dept.department_id"
+              >
+                {{ dept.name }}
+              </option>
+            </select>
           </div>
           <div class="col mt-3">
             <button type="submit" class="btn btn-primary">Submit</button>

@@ -29,7 +29,7 @@ class ClientPG extends Client {
         })
         .catch(e => {
           console.error('error stack' + e.stack)
-          reject(e.stack)
+          resolve(e.stack)
         })
       // .finally(() => {
       //   client.end()
