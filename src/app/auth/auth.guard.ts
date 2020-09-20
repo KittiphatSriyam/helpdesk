@@ -1,31 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ResolvedReflectiveFactory } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   UrlTree,
+  Router
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import * as localforage from 'localforage';
-
-class Member {
-  tokenAccess: string;
-  constructor() {
-    this.getTokenAccess();
-    console.log('aaaaaa');
-  }
-  async getTokenAccess() {
-    this.tokenAccess = await localforage.getItem('token');
-    console.log('bbbbbb');
-  }
-  token() {
-    return this.tokenAccess;
-  }
-}
+import { MemberService } from '../services/member.service';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
+  constructor(private memberService: MemberService, private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -34,8 +22,17 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const member = new Member();
-    console.log('member.tokenAccess->>', member.token());
-    return true;
+      return new Promise((resolve, reject)=>{
+      this.memberService.auth().then(result => {
+        console.log('result', result);
+        if(result != '' && result != null) {
+          this.router.navigateByUrl('/repair');
+          resolve(true);
+        } else {
+          this.router.navigateByUrl('');
+          resolve(false);
+        }
+      })
+      });   
   }
 }
