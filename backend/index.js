@@ -32,14 +32,11 @@ app.post('/login', async (req, res) => {
 })
 app.post('/getMemberByToken', async (req, res) => {
   const profile = getMemberByToken(req.body.token)
-  console.log('profile->>', profile);
   res.send(profile)
 })
 
 app.post('/register', async (req, res) => {
-  console.log('req->>', req.body);
   const member = await addMember(req.body)
-  console.log('member->>', member);
   res.status(200).json(member)
 })
 
