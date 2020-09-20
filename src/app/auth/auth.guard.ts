@@ -26,8 +26,13 @@ export class AuthGuard implements CanActivate {
       this.memberService.auth().then(result => {
         console.log('result', result);
         if(result != '' && result != null) {
-          this.router.navigateByUrl('/repair');
-          resolve(true);
+          console.log('route', route.routeConfig.path);
+          if(route.routeConfig.path == 'repair' || route.routeConfig.path == 'register') {
+            resolve(true);
+          } else {
+            this.router.navigateByUrl('/repair');
+            resolve(false);
+          }
         } else {
           this.router.navigateByUrl('');
           resolve(false);

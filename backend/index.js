@@ -27,8 +27,8 @@ app.post('/getDepartment', async (req, res) => {
 })
 
 app.post('/login', async (req, res) => {
-  const memberToken = await getMember(req.body)
-  res.status(200).json(memberToken)
+  // const memberToken = await getMember(req.body)
+  res.status(200).json('memberToken')
 })
 app.post('/getMemberByToken', async (req, res) => {
   const profile = getMemberByToken(req.body.token)
