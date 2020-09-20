@@ -7,7 +7,6 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import * as localForage from 'localforage';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -50,7 +49,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.mb.login(this.loginForm.value).subscribe((token: any) => {
         if (token != 500) {
-          localForage.setItem('token', token);
+          localStorage.setItem('token', token);
           this.router.navigateByUrl('repair');
         } else {
           alert('Login FAIL');
