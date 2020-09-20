@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { departmentService } from '../services/department.service';
-import { registerService } from '../services/register.service';
+import { DepartmentService } from '../services/department.service';
+import { MemberService } from '../services/member.service';
 import {
   FormBuilder,
   FormGroup,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -16,12 +16,12 @@ import {
 export class RegisterComponent implements OnInit {
   department: any;
   register: FormGroup;
-  email: true;
   passwordMatched: boolean;
   constructor(
-    private ds: departmentService,
-    private rg: registerService,
-    private formbuiler: FormBuilder
+    private ds: DepartmentService,
+    private ms: MemberService,
+    private formbuiler: FormBuilder,
+    private router: Router
   ) {
     this.initDefaultValue();
   }
@@ -44,9 +44,10 @@ export class RegisterComponent implements OnInit {
   }
   onsave() {
     if (this.register.valid) {
-      this.rg.save(this.register.value).subscribe((status: Number) => {
+      this.ms.register(this.register.value).subscribe((status: Number) => {
         if (status == 200) {
           alert('สมัครสมาชิกเรียบร้อย');
+          this.router.navigateByUrl('login');
         } else {
           alert('สมัครสมาชิกล้มเหลว');
         }
