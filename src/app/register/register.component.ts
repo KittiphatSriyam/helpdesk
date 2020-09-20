@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   department: any;
   register: FormGroup;
-  passwordMatched: boolean;
+  passwordMatched: boolean = true;
   constructor(
     private ds: DepartmentService,
     private ms: MemberService,

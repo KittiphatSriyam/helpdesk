@@ -8,9 +8,16 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RepairComponent } from './repair/repair.component';
+import { NavigatorComponent } from './navigator/navigator.component';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, LoginComponent, RepairComponent],
+  declarations: [
+    AppComponent,
+    RegisterComponent,
+    LoginComponent,
+    RepairComponent,
+    NavigatorComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -33,24 +33,21 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return new Promise((resolve, reject) => {
-      this.ms.auth().then((token: string) => {
-        if (this.permissions.canActivate(token)) {
-          if (state.url == '/repair') {
-            resolve(true);
-          } else {
-            this.router.navigateByUrl('/repair');
-            resolve(false);
-          }
-        } else {
-          if (state.url == '/' || state.url == '/register') {
-            resolve(true);
-          } else {
-            this.router.navigateByUrl('/');
-            resolve(false);
-          }
-        }
-      });
-    });
+    const token = localStorage.getItem('token');
+    if (this.permissions.canActivate(token)) {
+      if (state.url == '/repair') {
+        return true;
+      } else {
+        this.router.navigateByUrl('/repair');
+        return false;
+      }
+    } else {
+      if (state.url == '/' || state.url == '/register') {
+        return true;
+      } else {
+        this.router.navigateByUrl('/');
+        return false;
+      }
+    }
   }
 }

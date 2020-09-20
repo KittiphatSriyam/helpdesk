@@ -4,8 +4,6 @@ const bodyParser = require('body-parser')
 const { getDepartment } = require('./controller/department')
 const { addMember, getMember, getMemberByToken } = require('./controller/member')
 const cors = require('cors')
-const jwt = require('jsonwebtoken');
-
 
 app.use(cors({
   origin: "http://localhost:4200"
@@ -30,6 +28,7 @@ app.post('/login', async (req, res) => {
   const memberToken = await getMember(req.body)
   res.status(200).json(memberToken)
 })
+
 app.post('/getMemberByToken', async (req, res) => {
   const profile = getMemberByToken(req.body.token)
   res.send(profile)
