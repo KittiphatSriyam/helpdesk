@@ -64,12 +64,17 @@
           </div>
           <div class="col">
             <label for="age">Department : </label>
-            <input
+            <!-- <input
               type="text"
               class="form-control"
               name="dept"
               formControlName="dept"
-            />
+            /> -->
+            <select formControlName="dept">
+              <option *ngFor="let dept2 of depts2" [value]="dept2.Value">
+                {{title.Text}}
+              </option>
+          </select>
           </div>
           <div class="col mt-3">
             <button type="submit" class="btn btn-primary">Submit</button>

@@ -25,6 +25,12 @@ export class RegisterComponent implements OnInit {
   register: FormGroup;
   email: true;
   password: boolean;
+  department2 = [
+    {
+      id: '',
+      value: ''
+    }
+  ]
   constructor(
     private ds: departmentService,
     private formbuiler: FormBuilder
@@ -44,9 +50,9 @@ export class RegisterComponent implements OnInit {
     this.password = true;
   }
   ngOnInit(): void {
-    // this.ds.getDepartment().subscribe((res: string[]) => {
-    //   this.department = res;
-    // });
+    this.ds.getDepartment().subscribe((res: string[]) => {
+      this.department2 = res;
+    });
   }
   onsave(){ 
     console.log('this.register +++', this.register);
