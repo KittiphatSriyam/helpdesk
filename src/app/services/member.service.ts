@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -14,6 +13,7 @@ export class MemberService {
   register(param: any): Observable<any> {
     return this._http.post(this.urlRegister, param);
   }
+
   login(param: any): Observable<any> {
     return this._http.post(this.urlLogin, param);
   }
