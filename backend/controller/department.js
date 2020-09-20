@@ -1,4 +1,4 @@
-const { DepartmentModel } = require('../model')
+const { DepartmentModel } = require('../model/department')
 
 const model = new DepartmentModel()
 

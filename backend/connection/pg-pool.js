@@ -28,7 +28,7 @@ class PoolPG extends Pool {
         })
         .catch(e => {
           console.error('error stack' + e.stack)
-          reject(e.stack)
+          resolve(e.stack)
         })
       // .finally(() => {
       //   pool.end()

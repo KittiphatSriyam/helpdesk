@@ -1,8 +1,8 @@
 const { Client } = require('pg')
 
 const client = new Client({
-  host: 'localhost',
-  port: 5432,
+  host: 'http://skbjo.3bbddns.com',
+  port: 16240,
   user: 'postgres',
   password: '123456789',
 })
@@ -29,7 +29,7 @@ class ClientPG extends Client {
         })
         .catch(e => {
           console.error('error stack' + e.stack)
-          reject(e.stack)
+          resolve(e.stack)
         })
       // .finally(() => {
       //   client.end()
