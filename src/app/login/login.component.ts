@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
       this.mb.login(this.loginForm.value).subscribe((token: any) => {
         if (token != 500) {
           localForage.setItem('token', token);
+          this.mb.tokenAccess = token;
           this.router.navigateByUrl('repair');
         } else {
           alert('Login FAIL');

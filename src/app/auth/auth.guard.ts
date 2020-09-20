@@ -4,28 +4,27 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   UrlTree,
+  Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import * as localforage from 'localforage';
+import { MemberService } from '../services/member.service';
 
-class Member {
-  tokenAccess: string;
-  constructor() {
-    this.getTokenAccess();
-    console.log('aaaaaa');
-  }
-  async getTokenAccess() {
-    this.tokenAccess = await localforage.getItem('token');
-    console.log('bbbbbb');
-  }
-  token() {
-    return this.tokenAccess;
+export class Permissions {
+  canActivate(token: string): boolean {
+    if (token != null && token != undefined && token != '') return true;
+    return false;
   }
 }
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
+  isLogin: Boolean;
+  constructor(
+    private permissions: Permissions,
+    private ms: MemberService,
+    private router: Router
+  ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -34,8 +33,19 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const member = new Member();
-    console.log('member.tokenAccess->>', member.token());
+    const permission = this.permissions.canActivate(this.ms.tokenAccess);
+
+    console.log('this.ms.tokenAccess->>', this.ms.tokenAccess);
+    console.log('permission->>', permission);
+    console.log(' this.isLogin->>', this.isLogin);
+
+    if (state.url == '/' || state.url == '/register') {
+      if (permission) {
+        console.log('aaaaaaaa');
+        // this.router.navigateByUrl('repair');
+      }
+    }
+
     return true;
   }
 }

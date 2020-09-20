@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 export class MemberService {
   urlRegister: string = 'http://localhost:3000/register';
   urlLogin: string = 'http://localhost:3000/login';
+  tokenAccess: string;
 
   constructor(private _http: HttpClient) {}
 
