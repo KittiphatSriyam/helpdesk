@@ -8,6 +8,19 @@ class MemberModel {
 
     return rowCount > 0 ? 200 : 500
   }
+  async login({ email, password }) {
+
+    let { rows, rowCount } = await ClientPG.query(`SELECT * ,
+    public.member.name AS firstName,
+    public.department.name AS deptName FROM public.member
+    INNER JOIN public.department
+    ON public.member.department_id = public.department.department_id
+    WHERE email=$1 AND password=$2
+    `,
+      [email, password])
+
+    return rowCount > 0 ? rows : 500
+  }
 
 }
 

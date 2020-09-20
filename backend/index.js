@@ -1,8 +1,12 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const Controller = require('./controller')
+const { getDepartment } = require('./controller/department')
+const { addMember, getMember, getMemberByToken } = require('./controller/member')
 const cors = require('cors')
+const jwt = require('jsonwebtoken');
+
+
 app.use(cors({
   origin: "http://localhost:4200"
 }));
@@ -18,13 +22,23 @@ app.post('/', (req, res) => {
 
 
 app.post('/getDepartment', async (req, res) => {
-  const department = await Controller.getDepartment()
+  const department = await getDepartment()
   res.status(200).json(department)
+})
+
+app.post('/login', async (req, res) => {
+  const memberToken = await getMember(req.body)
+  res.send(memberToken)
+})
+app.post('/getMemberByToken', async (req, res) => {
+  const profile = getMemberByToken(req.body.token)
+  console.log('profile->>', profile);
+  res.send(profile)
 })
 
 app.post('/register', async (req, res) => {
   console.log('req->>', req.body);
-  const member = await Controller.member(req.body)
+  const member = await addMember(req.body)
   console.log('member->>', member);
   res.status(200).json(member)
 })
