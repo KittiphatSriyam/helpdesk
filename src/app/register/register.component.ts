@@ -35,12 +35,12 @@ export class RegisterComponent implements OnInit {
       age: [1],
       dept: [''],
     });
-    this.passwordMatched = true;
+    // this.passwordMatched = true;
   }
   ngOnInit(): void {
-    this.ds.getDepartment().subscribe((res: string[]) => {
-      this.department = res;
-    });
+    // this.ds.getDepartment().subscribe((res: string[]) => {
+    //   this.department = res;
+    // });
   }
   onsave() {
     if (this.register.valid) {
