@@ -48,17 +48,14 @@ export class LoginComponent implements OnInit {
   }
   onSubmit() {
     if (this.loginForm.valid) {
-      this.mb
-        .login(this.loginForm.value)
-        .subscribe((token: String | Number) => {
-          if (token != 500) {
-            localForage.setItem('token', token);
-
-            this.router.navigateByUrl('repair');
-          } else {
-            alert('Login FAIL');
-          }
-        });
+      this.mb.login(this.loginForm.value).subscribe((token: any) => {
+        if (token != 500) {
+          localForage.setItem('token', token);
+          this.router.navigateByUrl('repair');
+        } else {
+          alert('Login FAIL');
+        }
+      });
     }
   }
 }
