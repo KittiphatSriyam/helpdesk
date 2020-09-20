@@ -34,22 +34,21 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     return new Promise((resolve, reject) => {
-      this.ms.auth().then((result) => {
-        console.log('result', result);
-        if (result != '' && result != null) {
-          console.log('route', route.routeConfig.path);
-          if (
-            route.routeConfig.path == 'repair' ||
-            route.routeConfig.path == 'register'
-          ) {
+      this.ms.auth().then((token: string) => {
+        if (this.permissions.canActivate(token)) {
+          if (state.url == '/repair') {
             resolve(true);
           } else {
             this.router.navigateByUrl('/repair');
             resolve(false);
           }
         } else {
-          this.router.navigateByUrl('');
-          resolve(false);
+          if (state.url == '/' || state.url == '/register') {
+            resolve(true);
+          } else {
+            this.router.navigateByUrl('/');
+            resolve(false);
+          }
         }
       });
     });

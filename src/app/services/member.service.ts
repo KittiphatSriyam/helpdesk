@@ -18,7 +18,7 @@ export class MemberService {
   login(param: any): Observable<any> {
     return this._http.post(this.urlLogin, param);
   }
-  async auth(): Promise<any> {
+  async auth() {
     const result = await localForage.getItem('token');
     return result;
   }
