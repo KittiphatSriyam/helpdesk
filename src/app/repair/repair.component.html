@@ -1,10 +1,19 @@
 <app-navigator></app-navigator>
 
-<mat-tab-group mat-align-tabs="center" class="mt-3" [(selectedIndex)]="tabPage">
+<mat-tab-group
+  mat-align-tabs="center"
+  class="mt-3"
+  [(selectedIndex)]="tabPage"
+  (selectedTabChange)="onTabChanged()"
+  #tabChanged
+>
   <mat-tab label="Help Desk">
-    <app-repair-form></app-repair-form>
+    <app-repair-form (tabNumberPage)="setTabPage($event)"></app-repair-form>
   </mat-tab>
   <mat-tab label="Pending">
-    <app-show-que></app-show-que>
+    <ng-container #showQue></ng-container>
+    <ng-template #content>
+      <app-show-que></app-show-que>
+    </ng-template>
   </mat-tab>
 </mat-tab-group>

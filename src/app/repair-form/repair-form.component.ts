@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RepairService } from '../services/repair.service';
 
@@ -9,7 +9,7 @@ import { RepairService } from '../services/repair.service';
 })
 export class RepairFormComponent implements OnInit {
   repairForm: FormGroup;
-
+  @Output() tabNumberPage = new EventEmitter();
   constructor(private formbuiler: FormBuilder, private rs: RepairService) {}
 
   ngOnInit(): void {
@@ -30,7 +30,7 @@ export class RepairFormComponent implements OnInit {
         .subscribe(({ status }) => {
           if (status == 200) {
             alert('แจ้งปัญหาเรียบร้อย');
-            // this.tabPage = 2;
+            this.tabNumberPage.emit(2);
             this.repairForm.reset();
           } else {
             alert('แจ้งปัญหาล้มเหลว');
