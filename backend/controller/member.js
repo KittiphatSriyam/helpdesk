@@ -1,7 +1,6 @@
 const { MemberModel } = require('../model/member')
 const jwt = require('jsonwebtoken');
 const model = new MemberModel()
-
 class MemberController {
   addMember(param) {
     const resutl = model.register(param)
@@ -16,8 +15,17 @@ class MemberController {
     return member
   }
   getMemberByToken(Token) {
-    const decoded = jwt.verify(Token, 'helpdesk');
-    return decoded
+    let result = { profile: '', status: 200 }
+    jwt.verify(Token, 'helpdesk', (err, decode) => {
+      if (err != null && err != undefined && err != '') {
+        result.status = 500
+        result = { ...result, ...err }
+      } else {
+        result.profile = decode
+        result.status = 200
+      }
+    });
+    return result
   }
 }
 

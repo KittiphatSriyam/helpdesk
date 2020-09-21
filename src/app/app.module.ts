@@ -9,6 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RepairComponent } from './repair/repair.component';
 import { NavigatorComponent } from './navigator/navigator.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ShowQueComponent } from './show-que/show-que.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,7 @@ import { NavigatorComponent } from './navigator/navigator.component';
     LoginComponent,
     RepairComponent,
     NavigatorComponent,
+    ShowQueComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,6 +28,8 @@ import { NavigatorComponent } from './navigator/navigator.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

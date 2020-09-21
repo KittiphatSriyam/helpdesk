@@ -1,6 +1,6 @@
-<ul class="nav justify-content-end">
+<ul class="nav justify-content-end" *ngIf="profile != undefined">
   <li class="nav-item">
-    <span class="nav-link" *ngIf="profile != undefined"
+    <span class="nav-link"
       >Welcome {{ profile.firstname }} {{ profile.surname }}</span
     >
   </li>
