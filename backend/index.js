@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const { getDepartment } = require('./controller/department')
 const { addMember, getMember, getMemberByToken } = require('./controller/member')
 const cors = require('cors')
-
+const port = process.env.PORT || 3000
 app.use(cors({
   origin: "http://localhost:4200"
 }));
@@ -13,6 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
 app.use(bodyParser.text({ type: 'text/html' }))
+
+app.listen(port, function () {
+  console.log(`server is : http://localhost:${port}`);
+});
 
 app.post('/', (req, res) => {
   res.send('index.js')
@@ -39,6 +43,4 @@ app.post('/register', async (req, res) => {
   res.status(200).json(member)
 })
 
-app.listen(3000, () => {
-  console.log('http://localhost:3000');
-})
+
