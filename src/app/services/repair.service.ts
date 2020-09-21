@@ -12,4 +12,10 @@ export class RepairService {
   addProblem(param: any): Observable<any> {
     return this._http.post(this.url + 'add', param);
   }
+  getAllProblem(): Observable<any> {
+    return this._http.post(this.url + 'getAllProblem', []);
+  }
+  getProblemLimited(skip: Number, limit: Number): Observable<any> {
+    return this._http.post(this.url + 'getProblemLimited', { skip, limit });
+  }
 }

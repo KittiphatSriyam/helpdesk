@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const { getDepartment } = require('./controller/department')
-const { addProblem } = require('./controller/repair')
+const { addProblem, getAllProblem, getProblemLimited } = require('./controller/repair')
 const { addMember, getMember, getMemberByToken } = require('./controller/member')
 const cors = require('cors')
 const port = process.env.PORT || 3000
@@ -38,6 +38,16 @@ app.post('/getMemberByToken', async (req, res) => {
   const profile = getMemberByToken(req.body.token)
   res.send(profile)
 })
+
+app.post('/repair/getAllProblem', async (req, res) => {
+  const problem = await getAllProblem()
+  res.json(problem)
+})
+app.post('/repair/getProblemLimited', async (req, res) => {
+  const problem = await getProblemLimited(req.body);
+  res.json(problem)
+})
+
 app.post('/repair/add', async (req, res) => {
   const profile = getMemberByToken(req.body.token)
   const param = {

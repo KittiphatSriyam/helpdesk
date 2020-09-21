@@ -11,7 +11,10 @@ import { RepairComponent } from './repair/repair.component';
 import { NavigatorComponent } from './navigator/navigator.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatTabsModule } from '@angular/material/tabs';
 import { ShowQueComponent } from './show-que/show-que.component';
+import { MatTableModule } from '@angular/material/table';
+import { RepairFormComponent } from './repair-form/repair-form.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,7 @@ import { ShowQueComponent } from './show-que/show-que.component';
     RepairComponent,
     NavigatorComponent,
     ShowQueComponent,
+    RepairFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +34,8 @@ import { ShowQueComponent } from './show-que/show-que.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDatepickerModule,
+    MatTabsModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
