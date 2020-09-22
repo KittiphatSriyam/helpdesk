@@ -13,10 +13,25 @@ class AdminController {
       return { status: 500 }
     }
   }
+
+  async getProfileaAdminByToken(token) {
+    let result = { profile: '', status: 200 }
+    jwt.verify(token, 'helpdesk', (err, decode) => {
+      if (err != null && err != undefined && err != '') {
+        result.status = 500
+        result = { ...result, ...err }
+      } else {
+        result.profile = decode
+        result.status = 200
+      }
+    });
+    return result
+  }
 }
 
 const adminController = new AdminController()
 module.exports = {
-  adminLogin: adminController.adminLogin
+  adminLogin: adminController.adminLogin,
+  getProfileaAdminByToken: adminController.getProfileaAdminByToken
 }
 

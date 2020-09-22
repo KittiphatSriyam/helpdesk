@@ -13,4 +13,7 @@ export class AdminService {
   adminLogin(param): Observable<any> {
     return this._http.post(this.url + '/login', param);
   }
+  getProfileaAdminByToken(param): Observable<any> {
+    return this._http.post(this.url + '/getProfileaAdminByToken', param);
+  }
 }

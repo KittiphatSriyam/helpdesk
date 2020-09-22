@@ -15,9 +15,9 @@ class MemberController {
     }
     return member
   }
-  getMemberByToken(Token) {
+  getMemberByToken(token) {
     let result = { profile: '', status: 200 }
-    jwt.verify(Token, 'helpdesk', (err, decode) => {
+    jwt.verify(token, 'helpdesk', (err, decode) => {
       if (err != null && err != undefined && err != '') {
         result.status = 500
         result = { ...result, ...err }

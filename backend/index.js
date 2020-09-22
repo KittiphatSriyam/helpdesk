@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const { adminLogin } = require('./controller/admin')
+const { adminLogin, getProfileaAdminByToken } = require('./controller/admin')
 const { getDepartment } = require('./controller/department')
 const { addProblem, getProblemLimitedDone, getProblemLimitedPending, setStatusJob } = require('./controller/repair')
 const { addMember, getMember, getMemberByToken } = require('./controller/member')
@@ -73,6 +73,10 @@ app.post('/register', async (req, res) => {
 app.post('/admin/login', async (req, res) => {
   const token = await adminLogin(req.body)
   res.json(token)
+})
+app.post('/admin/getProfileaAdminByToken', async (req, res) => {
+  const profile = await getProfileaAdminByToken(req.body)
+  res.json(profile)
 })
 
 

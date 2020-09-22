@@ -19,7 +19,6 @@ export class Permissions {
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  isLogin: Boolean;
   constructor(private permissions: Permissions, private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
