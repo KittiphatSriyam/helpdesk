@@ -42,10 +42,12 @@ export class ScheduleComponent implements OnInit {
     this.rs
       .getProblemLimitedPending(skip, limit)
       .subscribe(({ data, status, countRow }) => {
-        if (status == 200) this.dataSource = data;
-        let count: any = Math.ceil(countRow / this.pagination.limit);
-        count = Array.from({ length: count }, (v, k) => k);
-        this.pagination.countRow = count;
+        if (status == 200) {
+          this.dataSource = data;
+          let count: any = Math.ceil(countRow / this.pagination.limit);
+          count = Array.from({ length: count }, (v, k) => k);
+          this.pagination.countRow = count;
+        }
       });
   }
   jobDone(id: number) {

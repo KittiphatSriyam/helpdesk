@@ -35,7 +35,7 @@
       <div class="content-dashboard">
         <h1>{{ pageRender }}</h1>
         <div *ngIf="pageRender == 'Schedule'">
-          <app-schedule (Render)="reRenderSchedule($event)"></app-schedule>
+          <app-schedule></app-schedule>
         </div>
         <div *ngIf="pageRender == 'History'">
           <app-history></app-history>
