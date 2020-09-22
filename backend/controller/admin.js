@@ -8,13 +8,14 @@ class AdminController {
     const official = await model.adminLogin(param)
     if (official.status == 200) {
       const token = jwt.sign(official.data, 'helpdesk', { expiresIn: '1h' });
+
       return { data: token, status: 200 }
     } else {
       return { status: 500 }
     }
   }
 
-  async getProfileaAdminByToken(token) {
+  async getProfileaAdminByToken({ token }) {
     let result = { profile: '', status: 200 }
     jwt.verify(token, 'helpdesk', (err, decode) => {
       if (err != null && err != undefined && err != '') {

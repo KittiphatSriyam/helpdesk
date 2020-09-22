@@ -62,4 +62,8 @@ export class ScheduleComponent implements OnInit {
       }
     });
   }
+
+  viewOpen() {
+    console.log('viewOpen');
+  }
 }

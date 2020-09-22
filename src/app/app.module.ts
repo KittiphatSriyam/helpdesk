@@ -21,6 +21,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { HistoryComponent } from './history/history.component';
+import { ViewProblemComponent } from './view-problem/view-problem.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { HistoryComponent } from './history/history.component';
     DashboardComponent,
     ScheduleComponent,
     HistoryComponent,
+    ViewProblemComponent,
   ],
   imports: [
     BrowserModule,
