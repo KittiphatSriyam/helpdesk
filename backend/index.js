@@ -3,7 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const { adminLogin } = require('./controller/admin')
 const { getDepartment } = require('./controller/department')
-const { addProblem, getAllProblem, getProblemLimited } = require('./controller/repair')
+const { addProblem, getProblemLimitedDone, getProblemLimitedPending, setStatusJob } = require('./controller/repair')
 const { addMember, getMember, getMemberByToken } = require('./controller/member')
 const cors = require('cors')
 const port = process.env.PORT || 3000
@@ -21,7 +21,7 @@ app.listen(port, function () {
 });
 
 app.post('/', (req, res) => {
-  res.send('index.js')
+  res.send(200)
 })
 
 
@@ -40,13 +40,18 @@ app.post('/getMemberByToken', async (req, res) => {
   res.send(profile)
 })
 
-app.post('/repair/getAllProblem', async (req, res) => {
-  const problem = await getAllProblem()
+app.post('/repair/getProblemLimitedDone', async (req, res) => {
+  const problem = await getProblemLimitedDone(req.body)
   res.json(problem)
 })
-app.post('/repair/getProblemLimited', async (req, res) => {
-  const problem = await getProblemLimited(req.body);
+app.post('/repair/getProblemLimitedPending', async (req, res) => {
+  const problem = await getProblemLimitedPending(req.body);
   res.json(problem)
+})
+app.post('/repair/setStatusJob', async (req, res) => {
+  const result = await setStatusJob(req.body);
+  res.json(result)
+
 })
 
 app.post('/repair/add', async (req, res) => {

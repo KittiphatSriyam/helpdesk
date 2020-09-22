@@ -12,10 +12,19 @@ export class RepairService {
   addProblem(param: any): Observable<any> {
     return this._http.post(this.url + 'add', param);
   }
-  getAllProblem(): Observable<any> {
-    return this._http.post(this.url + 'getAllProblem', []);
+  getProblemLimitedDone(skip: Number, limit: Number): Observable<any> {
+    return this._http.post(this.url + 'getProblemLimitedDone', {
+      skip,
+      limit,
+    });
   }
-  getProblemLimited(skip: Number, limit: Number): Observable<any> {
-    return this._http.post(this.url + 'getProblemLimited', { skip, limit });
+  getProblemLimitedPending(skip: Number, limit: Number): Observable<any> {
+    return this._http.post(this.url + 'getProblemLimitedPending', {
+      skip,
+      limit,
+    });
+  }
+  setStatusJob(id: number, status: number): Observable<any> {
+    return this._http.post(this.url + 'setStatusJob', { id, status });
   }
 }

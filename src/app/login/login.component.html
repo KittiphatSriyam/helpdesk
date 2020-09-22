@@ -1,9 +1,13 @@
-<div class="container mt-5">
+<div class="container" style="margin-top: 200px">
   <div class="row justify-content-md-center">
     <div class="card col-6 p-0">
-      <h5 class="card-header">LOG IN</h5>
       <div class="card-body">
-        <form class="col-12" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h3 class="card-title font-weight-bold">LOG IN</h3>
+        <form
+          class="col-12 mt-5 mb-5"
+          [formGroup]="loginForm"
+          (ngSubmit)="onSubmit()"
+        >
           <div class="col">
             <label for="Email address">Email address</label>
             <input
@@ -22,8 +26,10 @@
               formControlName="password"
             />
           </div>
-          <div class="col mt-3">
-            <button type="submit" class="btn btn-primary">Submit</button>
+          <div class="col mt-4">
+            <button type="submit" mat-raised-button color="primary">
+              Submit
+            </button>
           </div>
         </form>
       </div>

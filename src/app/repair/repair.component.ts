@@ -23,7 +23,7 @@ export class RepairComponent implements OnInit {
     this.tabPage = page;
   }
   onTabChanged() {
-    this.rs.getProblemLimited(0, 10).subscribe((data) => {
+    this.rs.getProblemLimitedPending(0, 10).subscribe((data) => {
       this.problem = data;
       this.rerenderShowQue();
     });

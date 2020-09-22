@@ -1,11 +1,12 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RepairService } from '../services/repair.service';
+
 @Component({
-  selector: 'app-show-que',
-  templateUrl: './show-que.component.html',
-  styleUrls: ['./show-que.component.less'],
+  selector: 'app-schedule',
+  templateUrl: './schedule.component.html',
+  styleUrls: ['./schedule.component.less'],
 })
-export class ShowQueComponent implements OnInit {
+export class ScheduleComponent implements OnInit {
   pagination = {
     skip: 0,
     limit: 10,
@@ -21,6 +22,7 @@ export class ShowQueComponent implements OnInit {
     'สถานะ',
     'เจ้าของ',
     'ผู้รับผิดชอบ',
+    'ตัวเลือก',
   ];
   dataSource: any = [];
 
@@ -45,5 +47,17 @@ export class ShowQueComponent implements OnInit {
         count = Array.from({ length: count }, (v, k) => k);
         this.pagination.countRow = count;
       });
+  }
+  jobDone(id: number) {
+    this.rs.setStatusJob(id, 3).subscribe(({ status }) => {
+      if (status == 200) {
+        alert('Success');
+        this.dataSource = this.dataSource.filter(
+          (data) => data.repair_id != id
+        );
+      } else {
+        alert('Fail...');
+      }
+    });
   }
 }
