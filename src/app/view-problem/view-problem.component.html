@@ -1,1 +1,40 @@
-<p>view-problem works!</p>
+<div class="dialog-view-problem">
+  <div class="dialog-close">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="close icon"
+      (click)="onClosedViewProblem()"
+      >close</mat-icon
+    >
+  </div>
+  <div class="dialog-title">
+    <h2>{{ data.title }}</h2>
+  </div>
+  <hr />
+  <div class="dialog-content ml-5">
+    <p class="mt-5">ปัญหา : {{ data.datail }}</p>
+    <p class="mt-3">สถานะ : {{ data.status }}</p>
+    <p class="mt-3">วันที่สร้าง : {{ data.create | date }}</p>
+    <p class="mt-3">ใช้ระยะเวลาประมาณ : {{ data.period }}</p>
+    <p class="mt-3">
+      รับผิดชอบโดย :
+      <span *ngIf="data.official">{{ data.official }}</span>
+    </p>
+    <mat-form-field class="mt-3">
+      <mat-label>ใช้ระยะเวลาประมาณ</mat-label>
+      <input
+        matInput
+        placeholder="Ex. 2ชม. , 1 วัน"
+        [(ngModel)]="dataModel.period"
+        required
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="dialog-footer pl-5">
+    <button mat-stroked-button color="primary" (click)="saveData()">
+      บันทึก
+    </button>
+    <div class="mt-5 ml-5 text-right text-muted">โดย : {{ data.owner }}</div>
+  </div>
+</div>

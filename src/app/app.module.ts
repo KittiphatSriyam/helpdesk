@@ -22,6 +22,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { HistoryComponent } from './history/history.component';
 import { ViewProblemComponent } from './view-problem/view-problem.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +51,8 @@ import { ViewProblemComponent } from './view-problem/view-problem.component';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
+    MatDialogModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

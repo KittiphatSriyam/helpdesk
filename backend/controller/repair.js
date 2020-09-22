@@ -1,4 +1,5 @@
 const { RepairModel } = require('../model/repair')
+const { getProfileaAdminByToken } = require("../controller/admin")
 const model = new RepairModel()
 
 class RepairController {
@@ -18,6 +19,11 @@ class RepairController {
     const resutl = await model.setStatusJob(param)
     return resutl
   }
+  async updateProblem(param) {
+    const profile = await getProfileaAdminByToken(param)
+    const resutl = await model.updateProblem({ ...param, profile })
+    return resutl
+  }
 
 }
 
@@ -26,6 +32,7 @@ module.exports = {
   addProblem: repairController.addProblem,
   getProblemLimitedDone: repairController.getProblemLimitedDone,
   getProblemLimitedPending: repairController.getProblemLimitedPending,
-  setStatusJob: repairController.setStatusJob
+  setStatusJob: repairController.setStatusJob,
+  updateProblem: repairController.updateProblem,
 }
 

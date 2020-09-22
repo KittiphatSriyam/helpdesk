@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { RepairService } from '../services/repair.service';
+import { ViewProblemComponent } from '../view-problem/view-problem.component';
 
 @Component({
   selector: 'app-schedule',
@@ -26,7 +28,7 @@ export class ScheduleComponent implements OnInit {
   ];
   dataSource: any = [];
 
-  constructor(private rs: RepairService) {}
+  constructor(private rs: RepairService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getProblem();
@@ -43,6 +45,21 @@ export class ScheduleComponent implements OnInit {
       .getProblemLimitedPending(skip, limit)
       .subscribe(({ data, status, countRow }) => {
         if (status == 200) {
+          for (let index in data) {
+            if (data[index].official) {
+              data[index].official =
+                data[index].official.name.trim() +
+                ' ' +
+                data[index].official.surname.trim();
+            }
+            if (data[index].owner) {
+              data[index].owner =
+                data[index].owner.name.trim() +
+                ' ' +
+                data[index].owner.surname.trim();
+            }
+          }
+
           this.dataSource = data;
           let count: any = Math.ceil(countRow / this.pagination.limit);
           count = Array.from({ length: count }, (v, k) => k);
@@ -63,7 +80,33 @@ export class ScheduleComponent implements OnInit {
     });
   }
 
-  viewOpen() {
-    console.log('viewOpen');
+  viewProblem(data) {
+    const viewProblem = this.dialog.open(ViewProblemComponent, {
+      width: '800px',
+      data: data,
+    });
+    viewProblem.afterClosed().subscribe((dataDialog) => {
+      if (dataDialog) {
+        const token = localStorage.getItem('adminToken');
+        this.rs
+          .updateProblem({ ...dataDialog, token })
+          .subscribe(({ data, status }) => {
+            if (status == 200) {
+              for (let index in this.dataSource) {
+                if (this.dataSource[index].repair_id == data.repair_id) {
+                  this.dataSource[index].period = data.period;
+                  this.dataSource[index].status = data.status_name;
+                  if (data.official) {
+                    this.dataSource[index].official =
+                      data.official.name.trim() +
+                      ' ' +
+                      data.official.surname.trim();
+                  }
+                }
+              }
+            }
+          });
+      }
+    });
   }
 }

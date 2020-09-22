@@ -15,17 +15,13 @@
       <td>{{ data.period }}</td>
       <td>{{ data.status }}</td>
       <td>
-        <span *ngIf="data.owner"
-          >{{ data.owner.name }} {{ data.owner.surname }}</span
-        >
+        <span *ngIf="data.owner">{{ data.owner }}</span>
       </td>
       <td>
-        <span *ngIf="data.official"
-          >{{ data.official.name }} {{ data.official.surname }}</span
-        >
+        <span *ngIf="data.official">{{ data.official }}</span>
       </td>
       <td>
-        <button mat-raised-button color="basic" (click)="viewOpen()">
+        <button mat-raised-button color="basic" (click)="viewProblem(data)">
           view
         </button>
         <button
