@@ -42,10 +42,26 @@ export class HistoryComponent implements OnInit {
     this.rs
       .getProblemLimitedDone(skip, limit)
       .subscribe(({ data, status, countRow }) => {
-        if (status == 200) this.dataSource = data;
-        let count: any = Math.ceil(countRow / this.pagination.limit);
-        count = Array.from({ length: count }, (v, k) => k);
-        this.pagination.countRow = count;
+        if (status == 200) {
+          for (let index in data) {
+            if (data[index].official) {
+              data[index].official =
+                data[index].official.name.trim() +
+                ' ' +
+                data[index].official.surname.trim();
+            }
+            if (data[index].owner) {
+              data[index].owner =
+                data[index].owner.name.trim() +
+                ' ' +
+                data[index].owner.surname.trim();
+            }
+          }
+          this.dataSource = data;
+          let count: any = Math.ceil(countRow / this.pagination.limit);
+          count = Array.from({ length: count }, (v, k) => k);
+          this.pagination.countRow = count;
+        }
       });
   }
 }

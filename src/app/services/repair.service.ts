@@ -27,4 +27,7 @@ export class RepairService {
   setStatusJob(id: number, status: number): Observable<any> {
     return this._http.post(this.url + 'setStatusJob', { id, status });
   }
+  updateProblem(param: any): Observable<any> {
+    return this._http.post(this.url + 'updateProblem', param);
+  }
 }

@@ -3,7 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const { adminLogin, getProfileaAdminByToken } = require('./controller/admin')
 const { getDepartment } = require('./controller/department')
-const { addProblem, getProblemLimitedDone, getProblemLimitedPending, setStatusJob } = require('./controller/repair')
+const { addProblem, getProblemLimitedDone, getProblemLimitedPending, setStatusJob, updateProblem } = require('./controller/repair')
 const { addMember, getMember, getMemberByToken } = require('./controller/member')
 const cors = require('cors')
 const port = process.env.PORT || 3000
@@ -51,7 +51,11 @@ app.post('/repair/getProblemLimitedPending', async (req, res) => {
 app.post('/repair/setStatusJob', async (req, res) => {
   const result = await setStatusJob(req.body);
   res.json(result)
+})
 
+app.post('/repair/updateProblem', async (req, res) => {
+  const result = await updateProblem(req.body);
+  res.json(result)
 })
 
 app.post('/repair/add', async (req, res) => {

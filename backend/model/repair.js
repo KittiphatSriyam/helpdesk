@@ -24,6 +24,7 @@ class RepairModel {
     LEFT JOIN official
     ON official.official_id = repair.response_id
     WHERE repair.status=$1
+    ORDER BY repair.repair_id ASC
     LIMIT $2 OFFSET $3
     `, [3, limit, skip])
 
@@ -68,6 +69,7 @@ class RepairModel {
       LEFT JOIN official
       ON official.official_id = repair.response_id
       WHERE repair.status=$1 OR repair.status=$2
+      ORDER BY repair.repair_id ASC
       LIMIT $3 OFFSET $4
     `, [1, 2, limit, skip])
 
@@ -97,8 +99,8 @@ class RepairModel {
         }
       }
       j++
-
     }
+
     return rowCount > 0 ? { data, status: 200, countRow: rows[0].countrow } : { data, status: 500 }
   }
   async setStatusJob({ id, status }) {
@@ -108,6 +110,45 @@ class RepairModel {
 
     return rowCount > 0 ? { status: 200 } : { status: 500 }
   }
+  async updateProblem({ id, period, profile }) {
+    let { rowCount } = await ClientPG.query(`UPDATE repair
+    SET period = $1, status = $2, response_id = $3
+    WHERE repair_id = $4`, [period, 2, profile.profile.official_id, id])
+    if (rowCount > 0) {
+      return await this.getProblemByID(id)
+    } else {
+      return { status: 500 }
+    }
+  }
+  async getProblemByID(id) {
+    let { rows, rowCount } = await ClientPG.query(`SELECT repair.*,own.* ,
+    status.status_name ,
+    official.member_id AS officialID
+    FROM repair
+    INNER JOIN member  own
+    ON own.id = repair.owner_id
+    INNER JOIN status
+    ON status.status_id = repair.status
+    LEFT JOIN official
+    ON official.official_id = repair.response_id
+    WHERE repair.repair_id=$1
+  `, [id])
+
+    let data = {
+      ...rows[0]
+    }
+
+    if (data.officialid != null) {
+      let result = await ClientPG.query(`SELECT member.* FROM member WHERE member.id = $1`, [data.officialid])
+      data.official = {
+        name: result.rows[0].name,
+        surname: result.rows[0].surname
+      }
+    }
+    return rowCount > 0 ? { data, status: 200 } : { data, status: 500 }
+  }
+
+
 }
 
 module.exports = {
