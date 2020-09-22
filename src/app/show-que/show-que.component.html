@@ -7,7 +7,7 @@
         </th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="dataSource">
       <tr *ngFor="let data of dataSource">
         <th scope="row">{{ data.id + pagination.skip }}</th>
         <td>{{ data.title }}</td>
@@ -15,7 +15,6 @@
         <td>{{ data.create | date }}</td>
         <td>{{ data.period }}</td>
         <td>{{ data.status }}</td>
-        <td>{{ data.end }}</td>
         <td>
           <span *ngIf="data.owner"
             >{{ data.owner.name }} {{ data.owner.surname }}</span

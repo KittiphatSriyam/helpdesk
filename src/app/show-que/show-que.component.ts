@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { RepairService } from '../services/repair.service';
 @Component({
   selector: 'app-show-que',
@@ -14,14 +14,13 @@ export class ShowQueComponent implements OnInit {
   currentPage: number = 0;
   displayedColumns: string[] = [
     '#',
-    'title',
-    'datail',
-    'create',
-    'period',
-    'status',
-    'end',
-    'owner',
-    'official',
+    'หัวข้อ',
+    'รายละเอียด',
+    'วันที่สร้าง',
+    'ระยะเวลา',
+    'สถานะ',
+    'เจ้าของ',
+    'ผู้รับผิดชอบ',
   ];
   dataSource: any = [];
 
@@ -30,10 +29,10 @@ export class ShowQueComponent implements OnInit {
   ngOnInit(): void {
     this.getProblem();
   }
+
   changePage(page: number) {
     this.currentPage = page;
     this.pagination.skip = page * this.pagination.limit;
-
     this.getProblem();
   }
   getProblem() {
@@ -42,9 +41,9 @@ export class ShowQueComponent implements OnInit {
       .getProblemLimited(skip, limit)
       .subscribe(({ data, status, countRow }) => {
         if (status == 200) this.dataSource = data;
-        this.pagination.countRow = [
-          ...Array(Math.ceil(countRow / this.pagination.limit)).keys(),
-        ].map((i) => i + 0);
+        let count: any = Math.ceil(countRow / this.pagination.limit);
+        count = Array.from({ length: count }, (v, k) => k);
+        this.pagination.countRow = count;
       });
   }
 }
