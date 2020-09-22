@@ -15,6 +15,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ShowQueComponent } from './show-que/show-que.component';
 import { MatTableModule } from '@angular/material/table';
 import { RepairFormComponent } from './repair-form/repair-form.component';
+import { AdminComponent } from './admin/admin.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { RepairFormComponent } from './repair-form/repair-form.component';
     NavigatorComponent,
     ShowQueComponent,
     RepairFormComponent,
+    AdminComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
