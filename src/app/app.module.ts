@@ -13,7 +13,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ShowQueComponent } from './show-que/show-que.component';
-import { MatTableModule } from '@angular/material/table';
 import { RepairFormComponent } from './repair-form/repair-form.component';
 import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -45,7 +44,6 @@ import { HistoryComponent } from './history/history.component';
     BrowserAnimationsModule,
     MatDatepickerModule,
     MatTabsModule,
-    MatTableModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
