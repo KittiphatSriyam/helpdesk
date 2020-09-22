@@ -1,5 +1,6 @@
-const { MemberModel } = require('../model/member')
 const jwt = require('jsonwebtoken');
+
+const { MemberModel } = require('../model/member')
 const model = new MemberModel()
 class MemberController {
   addMember(param) {

@@ -7,20 +7,19 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { MemberService } from '../services/member.service';
 
-export class Permissions {
+export class PermissionsAdmin {
   canActivate(token: string): boolean {
     if (token != null && token != undefined && token != '') return true;
     return false;
   }
 }
+
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
-  isLogin: Boolean;
-  constructor(private permissions: Permissions, private router: Router) {}
+export class AdminGuard implements CanActivate {
+  constructor(private permissions: PermissionsAdmin, private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -29,19 +28,19 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('adminToken');
     if (this.permissions.canActivate(token)) {
-      if (state.url == '/repair') {
-        return true;
-      } else {
-        this.router.navigateByUrl('/repair');
+      if (state.url == '/admin') {
+        this.router.navigateByUrl('/dashboard');
         return false;
+      } else {
+        return true;
       }
     } else {
-      if (state.url == '/' || state.url == '/register') {
+      if (state.url == '/admin') {
         return true;
       } else {
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/admin');
         return false;
       }
     }

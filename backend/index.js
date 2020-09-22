@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const { adminLogin } = require('./controller/admin')
 const { getDepartment } = require('./controller/department')
 const { addProblem, getAllProblem, getProblemLimited } = require('./controller/repair')
 const { addMember, getMember, getMemberByToken } = require('./controller/member')
@@ -62,6 +63,11 @@ app.post('/repair/add', async (req, res) => {
 app.post('/register', async (req, res) => {
   const member = await addMember(req.body)
   res.status(200).json(member)
+})
+
+app.post('/admin/login', async (req, res) => {
+  const token = await adminLogin(req.body)
+  res.json(token)
 })
 
 
