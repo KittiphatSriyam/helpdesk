@@ -14,9 +14,14 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     const token = localStorage.getItem('adminToken');
-    this.as.getProfileaAdminByToken(token).subscribe((profile) => {
-      console.log('profile->>', profile);
-    });
+    this.as
+      .getProfileaAdminByToken({ token })
+      .subscribe(({ status, message }) => {
+        if (status == 500) {
+          alert(message);
+          this.adminLogout();
+        }
+      });
   }
 
   adminLogout() {
