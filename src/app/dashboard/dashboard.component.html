@@ -1,1 +1,46 @@
-<p>dashboard works!</p>
+<mat-drawer-container class="sidenav-container">
+  <mat-drawer #drawer mode="side" opened class="slide-menu">
+    <div
+      class="list-menu"
+      [ngClass]="pageRender == 'Schedule' ? 'active' : ''"
+      (click)="menuSelected('Schedule')"
+    >
+      <h1>Schedule</h1>
+    </div>
+    <div
+      class="list-menu"
+      [ngClass]="pageRender == 'History' ? 'active' : ''"
+      (click)="menuSelected('History')"
+    >
+      <h1>History</h1>
+    </div>
+    <div class="list-menu-bottom">
+      <div class="list-menu-logout" (click)="adminLogout()">
+        <h1>LOG OUT</h1>
+      </div>
+    </div>
+  </mat-drawer>
+
+  <div class="sidenav-content">
+    <button
+      type="button"
+      mat-icon-button
+      color="primary"
+      (click)="drawer.toggle()"
+    >
+      <mat-icon aria-hidden="false" aria-label="home icon">menu</mat-icon>
+    </button>
+
+    <div class="render-content-dashboard">
+      <div class="content-dashboard">
+        <h1>{{ pageRender }}</h1>
+        <div *ngIf="pageRender == 'Schedule'">
+          <app-schedule (Render)="reRenderSchedule($event)"></app-schedule>
+        </div>
+        <div *ngIf="pageRender == 'History'">
+          <app-history></app-history>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-drawer-container>

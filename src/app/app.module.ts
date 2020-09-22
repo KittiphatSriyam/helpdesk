@@ -17,7 +17,11 @@ import { MatTableModule } from '@angular/material/table';
 import { RepairFormComponent } from './repair-form/repair-form.component';
 import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { ScheduleComponent } from './schedule/schedule.component';
+import { HistoryComponent } from './history/history.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +33,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     RepairFormComponent,
     AdminComponent,
     DashboardComponent,
+    ScheduleComponent,
+    HistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +46,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatDatepickerModule,
     MatTabsModule,
     MatTableModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

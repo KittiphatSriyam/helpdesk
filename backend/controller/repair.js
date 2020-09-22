@@ -6,12 +6,16 @@ class RepairController {
     const resutl = await model.addProblem(param)
     return resutl
   }
-  async getAllProblem() {
-    const resutl = await model.getAllProblem()
+  async getProblemLimitedDone(param) {
+    const resutl = await model.getProblemLimitedDone(param)
     return resutl
   }
-  async getProblemLimited(param) {
-    const resutl = await model.getProblemLimited(param)
+  async getProblemLimitedPending(param) {
+    const resutl = await model.getProblemLimitedPending(param)
+    return resutl
+  }
+  async setStatusJob(param) {
+    const resutl = await model.setStatusJob(param)
     return resutl
   }
 
@@ -20,7 +24,8 @@ class RepairController {
 const repairController = new RepairController()
 module.exports = {
   addProblem: repairController.addProblem,
-  getAllProblem: repairController.getAllProblem,
-  getProblemLimited: repairController.getProblemLimited
+  getProblemLimitedDone: repairController.getProblemLimitedDone,
+  getProblemLimitedPending: repairController.getProblemLimitedPending,
+  setStatusJob: repairController.setStatusJob
 }
 
